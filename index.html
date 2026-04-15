@@ -13,9 +13,6 @@ body{font-family:'Montserrat',sans-serif;background:var(--white);color:var(--bla
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;background:rgba(250,250,248,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--light)}
 .nav-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;letter-spacing:1px}
 .nav-brand span{font-size:11px;display:block;letter-spacing:2px;font-family:'Montserrat',sans-serif;font-weight:400;color:var(--gray);text-transform:uppercase}
-.nav-links{display:flex;gap:28px}
-.nav-links a{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--black);text-decoration:none;font-weight:500;transition:color .2s;cursor:pointer}
-.nav-links a:hover,.nav-links a.active{color:var(--gold)}
 .cart-btn{position:relative;background:var(--black);color:var(--white);border:none;padding:10px 20px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:600;transition:background .2s;display:flex;align-items:center;gap:8px}
 .cart-btn:hover{background:var(--gold)}
 .cart-count{background:var(--red);color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700}
@@ -94,6 +91,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .cart-checkout:hover{background:var(--gold)}
 .cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:299}
 .cart-overlay.open{display:block}
+
+/* CHECKOUT MODAL */
+.checkout-overlay{display:none;position:fixed;inset:0;z-index:400;background:rgba(10,10,10,.75);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:20px}
+.checkout-overlay.open{display:flex}
+.checkout-modal{background:var(--white);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;animation:mIn .3s ease}
+.checkout-header{padding:28px 32px 20px;border-bottom:1px solid var(--light);display:flex;align-items:center;justify-content:space-between}
+.checkout-header h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400}
+.checkout-close{background:none;border:none;font-size:20px;cursor:pointer}
+.checkout-body{padding:28px 32px}
+.checkout-summary{background:var(--cream);padding:16px;margin-bottom:24px}
+.checkout-summary h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:12px}
+.checkout-summary-item{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.checkout-summary-total{display:flex;justify-content:space-between;font-size:14px;font-weight:600;padding-top:10px;margin-top:4px}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-bottom:6px;font-weight:500}
+.form-group input,.form-group textarea{width:100%;border:1px solid var(--light);padding:12px 14px;font-family:'Montserrat',sans-serif;font-size:13px;color:var(--black);background:var(--white);outline:none;transition:border-color .2s}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--black)}
+.form-group textarea{resize:vertical;min-height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.submit-btn{width:100%;background:var(--black);color:var(--white);border:none;padding:16px;font-family:'Montserrat',sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;font-weight:600;transition:background .2s;margin-top:8px}
+.submit-btn:hover{background:var(--gold);color:var(--white)}
+.submit-btn:disabled{background:#ccc;cursor:not-allowed}
+/* Success state */
+.checkout-success{padding:60px 32px;text-align:center;display:none}
+.checkout-success.show{display:block}
+.checkout-form-wrap.hidden{display:none}
+.success-icon{font-size:48px;margin-bottom:16px}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;margin-bottom:8px}
+.success-sub{font-size:12px;color:var(--gray);line-height:1.8}
+@media(max-width:600px){.checkout-body{padding:20px}.checkout-header{padding:20px}.form-row{grid-template-columns:1fr}}
+
 /* FOOTER */
 footer{background:var(--black);color:var(--white);padding:48px 40px 32px;margin-top:80px}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:32px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
@@ -106,8 +134,7 @@ footer{background:var(--black);color:var(--white);padding:48px 40px 32px;margin-
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--black);color:var(--white);padding:12px 24px;font-size:11px;letter-spacing:1.5px;z-index:400;transition:transform .3s ease;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
 @media(max-width:768px){
-  nav{padding:12px 20px}.nav-links{display:none}
-  .hero{flex-direction:column;padding:40px 20px}
+  nav{padding:12px 20px}  .hero{flex-direction:column;padding:40px 20px}
   .catalog{padding:20px}.catalog-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}
   .modal{grid-template-columns:1fr}.modal-img{height:240px}
   .cart-drawer{width:100%;right:-100%}
@@ -119,8 +146,6 @@ footer{background:var(--black);color:var(--white);padding:48px 40px 32px;margin-
 
 <nav>
   <div class="nav-brand">Focus Vision SRL<span>Distribución Mayorista</span></div>
-  <div class="nav-links">
-  </div>
   <button class="cart-btn" onclick="toggleCart()">
     🛒 Carrito <span class="cart-count" id="cart-count">0</span>
   </button>
@@ -638,9 +663,89 @@ function toggleCart(){
 function checkout(){
   const items=Object.values(cart);
   if(items.length===0){showToast('El carrito está vacío');return;}
-  const lines=items.map(i=>`• ${i.name} (${i.id}) x${i.qty} = ${fmt(i.precio*i.qty)}`).join('\n');
+  // Build summary
   const total=items.reduce((s,i)=>s+i.precio*i.qty,0);
-  alert('Consulta de disponibilidad:\n\n'+lines+'\n\nSubtotal: '+fmt(total)+'\n\nNos comunicaremos a la brevedad para confirmar stock y coordinar entrega.');
+  const iva=Math.round(total*0.21);
+  let summaryHTML='<h4>Tu pedido</h4>';
+  items.forEach(i=>{
+    summaryHTML+=`<div class="checkout-summary-item"><span>${i.name} × ${i.qty}</span><span>${fmt(i.precio*i.qty)}</span></div>`;
+  });
+  summaryHTML+=`<div class="checkout-summary-total"><span>Subtotal</span><span>${fmt(total)}</span></div>`;
+  document.getElementById('checkout-summary').innerHTML=summaryHTML;
+  // Pre-fill pedido textarea
+  const lines=items.map(i=>`${i.name} (${i.id}) x${i.qty} — ${fmt(i.precio*i.qty)}`).join('\n');
+  document.getElementById('f-pedido').value=lines+'\n\nSubtotal: '+fmt(total)+' (+ IVA 21%: '+fmt(iva)+')';
+  document.getElementById('f-total').value=fmt(total);
+  // Reset form state
+  document.getElementById('checkout-success').classList.remove('show');
+  document.getElementById('checkout-form-wrap').classList.remove('hidden');
+  document.getElementById('submit-btn').disabled=false;
+  document.getElementById('submit-btn').textContent='Enviar consulta →';
+  // Open
+  document.getElementById('checkout-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  toggleCart();
+}
+function closeCheckout(){
+  document.getElementById('checkout-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeCheckoutOutside(e){
+  if(e.target===document.getElementById('checkout-overlay')) closeCheckout();
+}
+function buildPedidoText(){
+  const items=Object.values(cart);
+  const nombre=document.getElementById('f-nombre').value.trim();
+  const empresa=document.getElementById('f-empresa').value.trim();
+  const tel=document.getElementById('f-telefono').value.trim();
+  const notas=document.getElementById('f-notas').value.trim();
+  const subtotal=items.reduce((s,i)=>s+i.precio*i.qty,0);
+  const iva=Math.round(subtotal*0.21);
+  const total=subtotal+iva;
+  let txt='CONSULTA DE PEDIDO — Focus Vision SRL\n';
+  txt+='================================\n\n';
+  if(nombre) txt+='Nombre: '+nombre+'\n';
+  if(empresa) txt+='Óptica / Empresa: '+empresa+'\n';
+  if(tel) txt+='Teléfono: '+tel+'\n';
+  txt+='\nDETALLE DEL PEDIDO:\n';
+  items.forEach(i=>{
+    txt+=`• ${i.name} (${i.id}) × ${i.qty}  —  ${fmt(i.precio*i.qty)} (precios s/IVA)\n`;
+  });
+  txt+='\n--------------------------------\n';
+  txt+=`Subtotal (s/IVA):   ${fmt(subtotal)}\n`;
+  txt+=`IVA 21%:            ${fmt(iva)}\n`;
+  txt+=`TOTAL:              ${fmt(total)}\n`;
+  if(notas) txt+='\nNotas: '+notas;
+  return {txt, subtotal, iva, total};
+}
+
+function copyPedido(){
+  const {txt}=buildPedidoText();
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=document.getElementById('btn-copy');
+    btn.textContent='✓ Copiado';
+    btn.style.background='var(--gold)';
+    btn.style.color='#fff';
+    btn.style.border='none';
+    setTimeout(()=>{btn.textContent='📋 Copiar pedido';btn.style.background='var(--cream)';btn.style.color='var(--black)';btn.style.border='1px solid var(--light)';},2500);
+  }).catch(()=>showToast('No se pudo copiar'));
+}
+
+function sendMail(){
+  const items=Object.values(cart);
+  if(items.length===0){showToast('El carrito está vacío');return;}
+  const {txt,subtotal,iva,total}=buildPedidoText();
+  const subject=encodeURIComponent('Consulta de pedido — Focus Vision Catálogo');
+  const body=encodeURIComponent(txt);
+  window.location.href=`mailto:pedidosfocusvision@gmail.com?subject=${subject}&body=${body}`;
+  // Show success after short delay
+  setTimeout(()=>{
+    document.getElementById('checkout-form-wrap').classList.add('hidden');
+    document.getElementById('checkout-success').classList.add('show');
+    cart={};
+    updateCartUI();
+    document.querySelectorAll('.card-add').forEach(b=>{b.textContent='+ Carrito';b.classList.remove('added');});
+  },800);
 }
 
 // Toast
@@ -651,5 +756,57 @@ function showToast(msg){
   setTimeout(()=>t.classList.remove('show'),2500);
 }
 </script>
+
+<!-- CHECKOUT MODAL -->
+<div class="checkout-overlay" id="checkout-overlay" onclick="closeCheckoutOutside(event)">
+  <div class="checkout-modal">
+    <div class="checkout-header">
+      <h3>Consultar disponibilidad</h3>
+      <button class="checkout-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="checkout-body">
+      <!-- Success -->
+      <div class="checkout-success" id="checkout-success">
+        <div class="success-icon">✓</div>
+        <div class="success-title">Pedido enviado</div>
+        <div class="success-sub">Recibimos tu consulta.<br>Te contactamos a la brevedad para confirmar stock y coordinar la entrega.</div>
+      </div>
+      <!-- Form -->
+      <div class="checkout-form-wrap" id="checkout-form-wrap">
+        <div class="checkout-summary" id="checkout-summary"></div>
+        <form id="checkout-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre *</label>
+              <input type="text" name="nombre" id="f-nombre" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <label>Óptica / Empresa</label>
+              <input type="text" name="empresa" id="f-empresa" placeholder="Nombre del local">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email *</label>
+              <input type="email" name="email" id="f-email" placeholder="tu@mail.com" required>
+            </div>
+            <div class="form-group">
+              <label>Teléfono</label>
+              <input type="tel" name="telefono" id="f-telefono" placeholder="+54 11 ...">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Detalle del pedido</label>
+            <textarea name="pedido" id="f-pedido" rows="4"></textarea>
+          </div>
+          <input type="hidden" name="total" id="f-total">
+          <input type="hidden" name="_subject" value="Nuevo pedido — Focus Vision Catálogo">
+          <button type="submit" class="submit-btn" id="submit-btn">Enviar consulta →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
